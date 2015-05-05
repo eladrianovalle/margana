@@ -1,0 +1,8 @@
+<h3 class="text-center">Anagrams For The Word</h3>
+<h2 class="text-center"> <%= "#{@word}" %></h2>
+<img src="/img/arrow.png" class="center-block img-responsive">
+<ul class="text-center list-unstyled">
+  <% @anagrams.each do |anagram| %>
+  <li class="text-center h2"><%= "#{anagram}" %></li>
+  <% end %>
+</ul>
