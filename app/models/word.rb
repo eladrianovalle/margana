@@ -17,20 +17,31 @@ class Word < ActiveRecord::Base
 
     rev_array = reverse_letters(word_array)
 
-    anagrams = Array.new
+    combinations = Array.new
 
     length.times do 
       first_letter = word_array.first
       word_array.shift
       word_array.push(first_letter)
-      anagrams.push(word_array * "")
-      anagrams.push(word_array.reverse * "")
+      combinations.push(word_array * "")
+      combinations.push(word_array.reverse * "")
     end
 
-    anagrams.delete_if { |item| item == word }
+    combinations.delete_if { |item| item == word }
     
-    p anagrams
+    anagrams = []
+    combinations.each do |combo|
+      if Word.find_by_text(combo.downcase).present?
+        anagrams << combo
+      end
+    end
 
+    if anagrams.empty?
+      anagrams << "This word has no anagram!"
+    else
+      anagrams
+    end
+    anagrams
   end
 
 end
