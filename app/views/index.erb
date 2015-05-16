@@ -13,3 +13,8 @@
   </div>
   <input type="submit" class="btn btn-block">
 </form>
+
+<% if @error.present? %>
+  <hr>
+  <p class="error text-center text-danger"><%= "#{@error}" %></p>
+<% end %>

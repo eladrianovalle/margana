@@ -44,4 +44,30 @@ class Word < ActiveRecord::Base
     anagrams
   end
 
+  def self.three_letters?(word)
+    if word.length == 3
+      true
+    else
+      false
+    end
+  end 
+
+  def self.disctinct_letters?(word)
+    letter_array = words.chars
+    unique_letters = letter_array.uniq
+    if unique_letters.length < letter_array.length
+      false
+    else
+      true
+    end
+  end
+
+  def self.valid_input?(word)
+    if three_letters?(word) && disctinct_letters?(word)
+      true
+    else
+      false
+    end
+  end
+
 end
