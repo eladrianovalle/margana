@@ -10,6 +10,6 @@ describe 'Our Anagrams App' do
   
   it 'displays combinations for a word on a get to /anagrams/:word' do
     get("/anagrams/cat")
-    expect(last_response.body).to include("CAT", "CTA", "ACT", "ATC", "TCA", "TAC")
+    expect(last_response.body).to include("ACT")
   end  
 end

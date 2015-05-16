@@ -9,40 +9,50 @@ get '/anagrams/:word' do
 end
 
 post '/' do 
-  @word = params[:word]
+  word = params[:word]
 
-  word = @word
-
-  if valid_input?(word)
+  begin
+    valid_input(word)
     redirect "/anagrams/#{word}"
-  else
-    @error = "Error.  I'll need a 3 letter word."
+  rescue Exception => error
+    @error = error.message
     erb :index
   end
 end
 
-  def three_letters?(word)
-    if word.length == 3
-      true
-    else
-      false
-    end
-  end 
-
-  def disctinct_letters?(word)
+  def valid_input(word)
     letter_array = word.chars
     unique_letters = letter_array.uniq
-    if unique_letters.length < letter_array.length
-      false
-    else
-      true
+    if word.length > 3
+      raise Exception.new("Word must be less than or equal to 3 characters.")
+    elsif unique_letters.length < letter_array.length
+      raise Exception.new("Word must only contain unique letters.  No repetition.")
     end
   end
 
-  def valid_input?(word)
-    if three_letters?(word) && disctinct_letters?(word)
-      true
-    else
-      false
-    end
-  end
+  # def three_letters?(word)
+  #   if word.length == 3
+  #     true
+  #   else
+  #     false
+  #   end
+  # end 
+
+  # def disctinct_letters?(word)
+  #   letter_array = word.chars
+  #   unique_letters = letter_array.uniq
+  #   if unique_letters.length < letter_array.length
+  #     false
+  #   else
+  #     true
+  #   end
+  # end
+
+  # def valid_input?(word)
+  #   if three_letters?(word) && disctinct_letters?(word)
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
+
