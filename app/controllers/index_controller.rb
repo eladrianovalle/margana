@@ -2,9 +2,17 @@ get '/' do
   erb :index
 end
 
+# get '/anagrams/:word' do
+#   @word = params[:word].upcase
+#   @anagrams = Word.find_anagrams(@word)
+#   erb :show
+# end
+
 get '/anagrams/:word' do
   @word = params[:word].upcase
-  @anagrams = Word.find_anagrams(@word)
+  word_array = @word.chars.sort
+  alphabetized_string = word_array.join
+  @anagrams = Word.where("letters=?", alphabetized_string.downcase)
   erb :show
 end
 
@@ -19,6 +27,7 @@ post '/' do
     erb :index
   end
 end
+
 
   def valid_input(word)
     letter_array = word.chars

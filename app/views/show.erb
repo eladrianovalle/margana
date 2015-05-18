@@ -2,7 +2,9 @@
 <h2 class="text-center"> <%= "#{@word}" %></h2>
 <img src="/img/arrow.png" class="center-block img-responsive">
 <ul class="text-center list-unstyled">
-  <% @anagrams.each do |anagram| %>
-  <li class="text-center h2"><%= "#{anagram}" %></li>
+  <% if !@anagrams.nil? %>
+    <% @anagrams.each do |word| %>
+      <li class="text-center h2"><%= word.text.upcase %></li>
+    <% end %>
   <% end %>
 </ul>
