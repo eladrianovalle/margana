@@ -24,9 +24,13 @@ put '/words/:id' do
 
   @word.save
   redirect "/words/#{@word.id}"
-  # erb :"/words/show"
 end
 
+delete '/words/:id' do
+  @word = Word.find(params[:id])
+  @word.destroy
+  redirect "/words"
+end
 
 get '/words/:id' do
   @word = Word.find(params[:id])
