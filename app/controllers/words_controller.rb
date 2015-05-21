@@ -9,10 +9,24 @@ get '/words/new' do
 end
 
 post '/words' do
-  @word = Word.new(text: params[:text])
-  @word.save
+  @word = Word.create(text: params[:text])
   redirect "/words/#{@word.id}"
 end
+
+get '/words/:id/edit' do
+  @word = Word.find(params[:id])
+  erb :"/words/edit"
+end
+
+put '/words/:id' do
+  @word = Word.find(params[:id])
+  @word.text = params[:text]
+
+  @word.save
+  redirect "/words/#{@word.id}"
+  # erb :"/words/show"
+end
+
 
 get '/words/:id' do
   @word = Word.find(params[:id])

@@ -1,0 +1,7 @@
+<form method="post" action="<%= word_form_action(@word) %>" id="<%= word_form_id(@word) %>" class="<%= word_form_class(@word) %>">
+  <div class="form-group">
+    <input type="hidden" name="_method" value="<%= word_form_method(@word) %>"/>
+    <label for="text">DICTIONARY WORD</label>
+    <input name="text" type="text" class="form-control" placeholder="Enter new word here" value="<%= @word.text %>"/>
+  </div>
+</form>
