@@ -32,7 +32,7 @@ end
     letter_array = word.chars
     if word.length > 8
       raise Exception.new("Word is too long!  8 letters MAX!")
-    elsif !Word.find_by_text(word)
+    elsif !Word.find_by_text(word.downcase!)
       raise Exception.new("That's not a real word!  Try again")
     end
   end
