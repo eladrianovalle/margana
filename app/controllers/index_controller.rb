@@ -28,17 +28,35 @@ post '/' do
   end
 end
 
-
   def valid_input(word)
     letter_array = word.chars
-    unique_letters = letter_array.uniq
-    if word.length > 3
-      raise Exception.new("Word must be less than or equal to 3 characters.")
-    elsif unique_letters.length < letter_array.length
-      raise Exception.new("Word must only contain unique letters.  No repetition.")
+    if word.length > 8
+      raise Exception.new("Word is too long!  8 letters MAX!")
+    elsif !Word.find_by_text(word)
+      raise Exception.new("That's not a real word!  Try again")
     end
   end
 
+
+  #
+  # valid input method for 3 letter word anagrams
+  # using exceptions
+  #
+  # def valid_input(word)
+  #   letter_array = word.chars
+  #   unique_letters = letter_array.uniq
+  #   if word.length > 3
+  #     raise Exception.new("Word must be less than or equal to 3 characters.")
+  #   elsif unique_letters.length < letter_array.length
+  #     raise Exception.new("Word must only contain unique letters.  No repetition.")
+  #   end
+  # end
+
+
+  #
+  # validation methods used in anagram app 
+  # before adding exceptions
+  #
   # def three_letters?(word)
   #   if word.length == 3
   #     true
@@ -46,7 +64,7 @@ end
   #     false
   #   end
   # end 
-
+  #
   # def disctinct_letters?(word)
   #   letter_array = word.chars
   #   unique_letters = letter_array.uniq
@@ -56,7 +74,7 @@ end
   #     true
   #   end
   # end
-
+  #
   # def valid_input?(word)
   #   if three_letters?(word) && disctinct_letters?(word)
   #     true
